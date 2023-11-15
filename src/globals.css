@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.password-tips {
+  @apply text-sm text-slate-400 ml-4 relative before:absolute before:top-2.5 before:-left-4  before:-translate-y-1/2 before:w-2 before:h-2 before:bg-slate-400 before:rounded-full;
+}
