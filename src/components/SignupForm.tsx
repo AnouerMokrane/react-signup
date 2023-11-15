@@ -3,6 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "../appwrite/appwriteConfig";
 import LoadingSpinner from "./LoadingSpinner";
+import Swal from "sweetalert2";
 
 type FormValue = {
   username: string;
@@ -41,7 +42,21 @@ const SignupForm = () => {
     const response = await signup(data);
 
     if (!response?.name) {
-      alert("Somthing went wrong, please try again.");
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Something went wrong. Please try again later.",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "You have successfully signed up.",
+        showConfirmButton: false,
+        timer: 2500,
+      });
     }
 
     reset();
