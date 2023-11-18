@@ -12,7 +12,6 @@ import Profile from "./pages/Profile";
 import AuthLayout from "./components/AuthLayout";
 import SigninForm from "./components/auth/SigninForm";
 import Navbar from "./components/Navbar";
-import { AuthProvider } from "./context/AuthContext";
 import PrivatePages from "./components/PrivatePages";
 
 const RootLayout = () => {

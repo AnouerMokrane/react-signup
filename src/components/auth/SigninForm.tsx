@@ -13,7 +13,7 @@ type FormValue = {
 };
 
 const SigninForm = () => {
-  const { user, setUser } = useAuth();
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const schema = z.object({
     email: z.string().email(),
@@ -42,7 +42,7 @@ const SigninForm = () => {
 
     const response = await newSession;
 
-    if (response) {
+    if (response?.name) {
       const UserDetails = {
         userId: response.$id,
         name: response.name,

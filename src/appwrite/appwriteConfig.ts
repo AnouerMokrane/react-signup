@@ -30,10 +30,7 @@ export const signup = async (userInfo: UserInfo) => {
 
 export const signin = async (userInfo: { email: string; password: string }) => {
   try {
-    const session = await account.createEmailSession(
-      userInfo.email,
-      userInfo.password
-    );
+    await account.createEmailSession(userInfo.email, userInfo.password);
     const user = account.get();
     return user;
   } catch (error) {
