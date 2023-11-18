@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
     setIsLoading(true);
     try {
       const accountDetails = await account.get();
-      console.log(accountDetails);
       setUser({
         userId: accountDetails.$id,
         name: accountDetails.name,
