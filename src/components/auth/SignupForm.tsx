@@ -42,21 +42,21 @@ const SignupForm = () => {
   const onSubmit = async (data: FormValue) => {
     const response = await signup(data);
 
-    if (!response?.name) {
-      Swal.fire({
+    if (response && response.name) {
+      await Swal.fire({
         position: "top-end",
         icon: "error",
         title: "Something went wrong. Please try again later.",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
       });
     } else {
-      Swal.fire({
+      await Swal.fire({
         position: "top-end",
         icon: "success",
         title: "You have successfully signed up.",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
       });
     }
 

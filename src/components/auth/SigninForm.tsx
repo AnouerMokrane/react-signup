@@ -42,27 +42,27 @@ const SigninForm = () => {
 
     const response = await newSession;
 
-    if (response?.name) {
+    if (response && response.name) {
       const UserDetails = {
         userId: response.$id,
         name: response.name,
       };
-      Swal.fire({
+      await Swal.fire({
         position: "top-end",
         icon: "success",
         title: "You have successfully sign in.",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
       });
       setUser(UserDetails);
       navigate("/");
     } else {
-      Swal.fire({
+      await Swal.fire({
         position: "top-end",
         icon: "error",
         title: "Something went wrong. Please try again later.",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
       });
     }
 

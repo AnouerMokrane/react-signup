@@ -14,6 +14,8 @@ client
 
 export const account = new Account(client);
 
+let sessionId = "";
+
 export const signup = async (userInfo: UserInfo) => {
   try {
     const user = await account.create(
@@ -22,6 +24,7 @@ export const signup = async (userInfo: UserInfo) => {
       userInfo.password,
       userInfo.username
     );
+    sessionId = user.$id;
     return user;
   } catch (error) {
     console.log(error);
@@ -33,6 +36,14 @@ export const signin = async (userInfo: { email: string; password: string }) => {
     await account.createEmailSession(userInfo.email, userInfo.password);
     const user = account.get();
     return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logout = async () => {
+  try {
+    await account.deleteSession(sessionId);
   } catch (error) {
     console.log(error);
   }

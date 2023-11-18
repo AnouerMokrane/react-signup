@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { account } from "../appwrite/appwriteConfig";
+import GlobalLoading from "../components/GlobalLoading";
 
 type AuthProviderType = {
   children: React.ReactNode;
@@ -17,14 +19,33 @@ type UserContextType = {
 export const authContext = createContext({} as UserContextType);
 
 export const AuthProvider = ({ children }: AuthProviderType) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<AuthUser | null>(null);
 
+  const checkUserStatus = async () => {
+    setIsLoading(true);
+    try {
+      const accountDetails = await account.get();
+      console.log(accountDetails);
+      setUser({
+        userId: accountDetails.$id,
+        name: accountDetails.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    checkUserStatus();
+  }, []);
   return (
     <authContext.Provider value={{ user, setUser }}>
-      {children}
+      {isLoading ? <GlobalLoading /> : children}
     </authContext.Provider>
   );
 };
+
 export const useAuth = () => {
   const userContext = useContext(authContext);
   if (!userContext) {
