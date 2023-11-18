@@ -27,3 +27,16 @@ export const signup = async (userInfo: UserInfo) => {
     console.log(error);
   }
 };
+
+export const signin = async (userInfo: { email: string; password: string }) => {
+  try {
+    const session = await account.createEmailSession(
+      userInfo.email,
+      userInfo.password
+    );
+    const user = account.get();
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};

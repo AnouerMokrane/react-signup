@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signup } from "../appwrite/appwriteConfig";
-import LoadingSpinner from "./LoadingSpinner";
+import { signup } from "../../appwrite/appwriteConfig";
+import LoadingSpinner from "../LoadingSpinner";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 type FormValue = {
   username: string;
@@ -69,7 +70,7 @@ const SignupForm = () => {
           Welcome to Design Community{" "}
         </h1>
         <p className=" text-secondary-dark text-sm md:text-base">
-          Already have an ccount? <a href={"/"}>Log in</a>{" "}
+          Already have an account? <Link to={"/signin"}>Sign in</Link>{" "}
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-5 md:mt-10">
           <div className="  xl:w-[660px] flex flex-col mb-4">
@@ -151,7 +152,7 @@ const SignupForm = () => {
           </button>
 
           <p className="ml-2 mt-2 text-[12px]">
-            Already have an account? Log in
+            Already have an account? <Link to={"/signin"}>Sign in</Link>
           </p>
         </form>
       </div>
